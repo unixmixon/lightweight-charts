@@ -1,6 +1,6 @@
 /*!
  * @license
- * TradingView Lightweight Charts™ v4.1.0-dev+202308032025
+ * TradingView Lightweight Charts™ v4.1.0-dev+202308032033
  * Copyright (c) 2023 TradingView, Inc.
  * Licensed under Apache License 2.0 https://www.apache.org/licenses/LICENSE-2.0
  */
@@ -13030,10 +13030,10 @@ class ChartApi {
         const model = this._private__chartWidget._internal_model();
         this._private__timeScaleApi = new TimeScaleApi(model, this._private__chartWidget._internal_timeAxisWidget());
     }
-    setCrossHairXY(x, y, visible) {
+    setCrossHairXY(x, y, visible, fire = false) {
         var _a, _b;
         /* eslint-disable @typescript-eslint/no-unsafe-call */
-        (_b = (_a = this._private__chartWidget) === null || _a === void 0 ? void 0 : _a._internal_paneWidgets()[0]) === null || _b === void 0 ? void 0 : _b._internal_setCrosshair(x, y, visible);
+        (_b = (_a = this._private__chartWidget) === null || _a === void 0 ? void 0 : _a._internal_paneWidgets()[0]) === null || _b === void 0 ? void 0 : _b._internal_setCrosshair(x, y, visible, fire);
     }
     remove() {
         this._private__chartWidget._internal_clicked()._internal_unsubscribeAll(this);
@@ -13206,7 +13206,7 @@ const customSeriesDefaultOptions = Object.assign(Object.assign({}, seriesOptions
  * Returns the current version as a string. For example `'3.3.0'`.
  */
 function version() {
-    return "4.1.0-dev+202308032025";
+    return "4.1.0-dev+202308032033";
 }
 
 export { ColorType, CrosshairMode, LastPriceAnimationMode, LineStyle, LineType, MismatchDirection, PriceLineSource, PriceScaleMode, TickMarkType, TrackingModeExitMode, createChart, customSeriesDefaultOptions, isBusinessDay, isUTCTimestamp, version };
