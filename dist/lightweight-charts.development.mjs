@@ -1,6 +1,6 @@
 /*!
  * @license
- * TradingView Lightweight Charts™ v4.1.0-dev+202308031955
+ * TradingView Lightweight Charts™ v4.1.0-dev+202308032025
  * Copyright (c) 2023 TradingView, Inc.
  * Licensed under Apache License 2.0 https://www.apache.org/licenses/LICENSE-2.0
  */
@@ -9685,22 +9685,19 @@ class PaneWidget {
     _internal_getElement() {
         return this._private__rowElement;
     }
-    _internal_setCrosshair(xx, yy, visible) {
+    _internal_setCrosshair(xx, yy, visible, fire = false) {
         if (!this._private__state) {
             return;
         }
         if (visible) {
             const x = xx;
             const y = yy;
-            this._private__setCrosshairPositionNoFire(x, y);
+            this._private__setCrosshairPositionCustom(x, y, fire);
         }
         else {
             this._private__state._internal_model()._internal_setHoveredSource(null);
             this._private__clearCrosshairPosition();
         }
-    }
-    _private__setCrosshairPositionNoFire(x, y) {
-        this._private__model()._internal_setAndSaveCurrentPositionFire(this._private__correctXCoord(x), this._private__correctYCoord(y), false, ensureNotNull(this._private__state));
     }
     _internal_updatePriceAxisWidgetsStates() {
         if (this._private__state === null) {
@@ -9965,6 +9962,9 @@ class PaneWidget {
     }
     _internal_drawAdditionalSources(target, paneViewsGetter) {
         this._private__drawSources(target, paneViewsGetter);
+    }
+    _private__setCrosshairPositionCustom(x, y, fire = false) {
+        this._private__model()._internal_setAndSaveCurrentPositionFire(this._private__correctXCoord(x), this._private__correctYCoord(y), fire, ensureNotNull(this._private__state));
     }
     _private__onStateDestroyed() {
         if (this._private__state !== null) {
@@ -12811,7 +12811,7 @@ const customSeriesDefaultOptions = Object.assign(Object.assign({}, seriesOptions
  * Returns the current version as a string. For example `'3.3.0'`.
  */
 function version() {
-    return "4.1.0-dev+202308031955";
+    return "4.1.0-dev+202308032025";
 }
 
 export { ColorType, CrosshairMode, LastPriceAnimationMode, LineStyle, LineType, MismatchDirection, PriceLineSource, PriceScaleMode, TickMarkType, TrackingModeExitMode, createChart, customSeriesDefaultOptions, isBusinessDay, isUTCTimestamp, version };

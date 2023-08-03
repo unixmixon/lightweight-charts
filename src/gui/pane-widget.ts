@@ -190,22 +190,18 @@ export class PaneWidget implements IDestroyable, MouseEventHandlers {
 		return this._rowElement;
 	}
 
-	public setCrosshair(xx: number,yy: number,visible: boolean): void {
-	    if (!this._state) {
-	      return;
-	    }
-	    if (visible){
-	      const x = xx as Coordinate;
-	      const y = yy as Coordinate;
-	      this._setCrosshairPositionNoFire(x, y);
-	    } else {
-	      this._state.model().setHoveredSource(null);
-	      this._clearCrosshairPosition();
-	    }
-	  }
-	
-	private _setCrosshairPositionNoFire(x: Coordinate, y: Coordinate): void {
-	    this._model().setAndSaveCurrentPositionFire(this._correctXCoord(x), this._correctYCoord(y), false, ensureNotNull(this._state));
+	public setCrosshair(xx: number, yy: number, visible: boolean, fire: boolean = false): void {
+		if (!this._state) {
+			return;
+		}
+		if (visible) {
+			const x = xx as Coordinate;
+			const y = yy as Coordinate;
+			this._setCrosshairPositionCustom(x, y, fire);
+		} else {
+			this._state.model().setHoveredSource(null);
+			this._clearCrosshairPosition();
+		}
 	}
 
 	public updatePriceAxisWidgetsStates(): void {
@@ -524,6 +520,10 @@ export class PaneWidget implements IDestroyable, MouseEventHandlers {
 
 	public drawAdditionalSources(target: CanvasRenderingTarget2D, paneViewsGetter: IPaneViewsGetter): void {
 		this._drawSources(target, paneViewsGetter);
+	}
+
+	private _setCrosshairPositionCustom(x: Coordinate, y: Coordinate, fire: boolean = false): void {
+		this._model().setAndSaveCurrentPositionFire(this._correctXCoord(x), this._correctYCoord(y), fire, ensureNotNull(this._state));
 	}
 
 	private _onStateDestroyed(): void {
