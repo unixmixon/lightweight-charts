@@ -282,6 +282,10 @@ export interface IChartApi {
 	 */
 	unsubscribeCrosshairMove(handler: MouseEventHandler): void;
 
+	setCrossHairXY(x: number, y: number, visible: boolean): void;
+
+	clearCrossHair(): void;
+
 	/**
 	 * Returns API to manipulate a price scale.
 	 *
