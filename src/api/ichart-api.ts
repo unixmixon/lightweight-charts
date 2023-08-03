@@ -284,8 +284,6 @@ export interface IChartApi {
 
 	setCrossHairXY(x: number, y: number, visible: boolean): void;
 
-	clearCrossHair(): void;
-
 	/**
 	 * Returns API to manipulate a price scale.
 	 *

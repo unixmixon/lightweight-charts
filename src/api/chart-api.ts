@@ -162,11 +162,7 @@ export class ChartApi implements IChartApi, DataUpdatesConsumer<SeriesType> {
 
 	public setCrossHairXY(x: number, y: number, visible: boolean): void {
 	/* eslint-disable @typescript-eslint/no-unsafe-call */
-		this._chartWidget?.paneWidgets()[0]?.setCrossHair(x, y, visible);
-	}
-
-	public clearCrossHair(): void {
-		this._chartWidget.paneWidgets()[0].clearCrossHair();
+		this._chartWidget?.paneWidgets()[0]?.setCrosshair(x, y, visible);
 	}
 
 	public remove(): void {
